@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Excellence_Slider>
+            <active>true</active>
+            <codePool>community</codePool>
+           <depends>
+                <Excellence_Base/>
+            </depends>
+        </Excellence_Slider>
+    </modules>
+</config> 

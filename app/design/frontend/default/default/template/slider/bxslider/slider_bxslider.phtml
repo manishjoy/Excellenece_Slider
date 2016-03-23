@@ -1,0 +1,32 @@
+<div class="wrapper1" style="visibility:hidden;">
+    <div class="slider-wrapper theme-default" style="position:relative;">
+        <?php
+        $sliderData = $this->getSliderData();  
+        $slidesData = Mage::getModel('slider/slider')->getSliderData($sliderData['id']);
+        ?>
+
+        <div <?php if ($slidesData): ?>class="slider"<?php endif; ?>>
+            <?php
+            foreach ($slidesData as $row):
+                $url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $row['filename'];
+                $var = $row['content'];
+                if (strpos($var, 'http://') !== 0 && strpos($var, 'https://') !== 0) {
+                    $var = 'http://' . $var;
+                }
+                echo '<a href="' . $var . '"><img src="' . $url . '" alt=""  title="' . $row['title'] . '" /></a>';
+            endforeach;
+            ?>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(window).load(function() {
+        jQuery('.slider').bxSlider({
+            captions: true,
+            auto: true
+        });
+        jQuery(".wrapper1").css("visibility", "visible");
+    });
+
+</script>

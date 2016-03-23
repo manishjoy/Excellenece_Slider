@@ -1,0 +1,12 @@
+<?php
+
+$getSlider = Mage::Helper('slider')->getSelectedSlider();
+
+if ($getSlider == 'bxslider') {
+    echo $this->getChildHtml('bxslider_slider');
+} elseif ($getSlider == 'nivoslider') {
+    echo $this->getChildHtml('nivo_slider');
+} elseif ($getSlider == 'iscroll') {
+    echo $this->getChildHtml('iscroll_slider');
+}
+?>

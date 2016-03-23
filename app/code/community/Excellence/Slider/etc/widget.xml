@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<widgets>
+    <widget type="slider/product_widget_slider" translate="name description" module="slider">
+        <name>Excellence slider</name>
+        <description>List of Products Recently Compared and Removed from the Compare List by Visitor</description>
+        <parameters>
+            <paper_size translate="label">
+                <required>1</required>
+                <visible>1</visible>
+            
+                <label>Select Slider to display</label>
+                <type>select</type>
+ 		<value>1</value>
+                <values>
+                    <default translate="label">
+                        <value>1</value>
+                        <label>First</label>
+                    </default>
+                    <list translate="label">
+                        <value>2</value>
+                        <label>Second</label>
+                    </list>
+                </values>
+
+            </paper_size>
+        </parameters>
+    </widget>
+</widgets>

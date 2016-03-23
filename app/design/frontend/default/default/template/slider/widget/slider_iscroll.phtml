@@ -1,0 +1,71 @@
+
+<script type="text/javascript">
+
+    var myScroll;
+
+    function loaded() {
+        myScroll = new IScroll('#wrapper', {
+            scrollX: true,
+            scrollY: false,
+            momentum: false,
+            snap: 'li',
+            snapSpeed: 400,
+            keyBindings: true,
+            indicators: {
+                el: document.getElementById('indicator'),
+                resize: true
+            }
+        });
+    }
+
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    }, false);
+
+</script>
+<body onload="loaded()">
+    <div class="viewport_class" id="viewport" style="visibility:hidden;">
+        <div id="wrapper">
+            <div class="scroller">
+                <?php
+                $sliderData = $this->getSliderData();
+                $slidesData = Mage::getModel('slider/slider')->getSliderData($sliderData['id']);
+                ?>
+                <ul <?php if ($slidesData): ?> class="nivoSliders slider<?php echo $sliderData['id'] ?>"<?php endif; ?>>
+                    <?php
+                    foreach ($slidesData as $row):
+
+                        $url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $row['filename'];
+                        $var = $row['content'];
+                        if (strpos($var, 'http://') !== 0 && strpos($var, 'https://') !== 0) {
+                            $var = 'http://' . $var;
+                        }
+                        echo '<li class="slide"><a class="painting" href="' . $var . '"><img width="100%" height="100%" src="' . $url . '" alt="' . $row['title'] . '"  title="' . $row['title'] . '"/></a><div class="iscroll-caption"><span>' . $row['title'] . '</span></div></li>';
+                    endforeach;
+                    ?>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="cont">
+        <div id="indicator">
+            <div id="dotty"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        jQuery(document).ready(function() {
+            var element = parseInt(jQuery('.slider<?php echo $sliderData['id'] ?>  li').length);
+            var imagelength = parseInt(jQuery('#viewport').css('width'));
+            var containerlength = imagelength * element;
+            slidewidth = 100 / element;
+            slidewidth = slidewidth + '%';
+            jQuery('.scroller').css('width', containerlength);
+            //jQuery('#indicator').css('width', indicatorwidth);
+            jQuery('.slide').css('width', slidewidth);
+
+            jQuery(".viewport_class").css("visibility", "visible");
+        });
+    </script>
+</body>

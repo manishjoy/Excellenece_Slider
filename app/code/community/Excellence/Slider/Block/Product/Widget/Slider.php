@@ -1,0 +1,29 @@
+<?php
+
+class Excellence_Slider_Block_Product_Widget_Slider extends Mage_Core_Block_Template implements Mage_Widget_Block_Interface {
+
+    public function _prepareLayout() {
+        $this->getLayout()->getBlock('head')->addJs('jquery/jquery-2.1.1.min.js');
+        $this->getLayout()->getBlock('head')->addJs('jquery/noconflict.js');
+        $head = $this->getLayout()->getBlock('root')->getChild('head');
+        $head->addJs('bxslider/jquery.bxslider.js');
+        $head->addCss('css/bxslider/jquery.bxslider.css');
+        $head->addJs('nivo/jquery.nivo.slider.js');
+        $head->addCss('css/nivo/nivo-slider.css');
+        $head->addCss('images/nivo/default.css');
+        return parent::_prepareLayout();
+    }
+
+    public function _construct() {
+        parent::_construct();
+        $getSlider = Mage::Helper('slider')->getSelectedSlider();
+        if ($getSlider == 'bxslider') {
+            $this->setTemplate("slider/widget/slider_bxslider.phtml");
+        } elseif ($getSlider == 'iscroll') {
+            $this->setTemplate("slider/widget/slider_iscroll.phtml");
+        } elseif ($getSlider == 'nivoslider') {
+            $this->setTemplate("slider/widget/slider_nivo.phtml");
+        }
+    }
+
+}
