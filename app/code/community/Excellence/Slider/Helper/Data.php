@@ -24,18 +24,22 @@ class Excellence_Slider_Helper_Data extends Mage_Core_Helper_Abstract {
             $dynamicpageid = Mage::getSingleton('cms/page')->getPageId();
             if ($display_id == $dynamicpageid) {
                 $template = 'slider/slider.phtml';
+                return $template;
             }
         } elseif ($slider_display_page == Excellence_Slider_Model_Pages::CATEGORY_PAGE && !Mage::registry('current_product') && Mage::registry('current_category')) {
             if (isset($_REQUEST['cat'])) {
                 if ($_REQUEST['cat'] == $display_id) {
                     $template = 'slider/slider.phtml';
+                    return $template;
                 }
             } elseif (Mage::getSingleton('catalog/layer')) {
                 $layer = Mage::getSingleton('catalog/layer');
                 $_category = $layer->getCurrentCategory();
                 $currentCategoryId = $_category->getId();
+                Mage::log($currentCategoryId);
                 if ($display_id == $currentCategoryId) {
                     $template = 'slider/slider.phtml';
+                    return $template;
                 }
             }
         } elseif ($slider_display_page == Excellence_Slider_Model_Pages::PRODUCT_PAGE) {
@@ -44,18 +48,21 @@ class Excellence_Slider_Helper_Data extends Mage_Core_Helper_Abstract {
                 $currentproductId = $currentproduct->getId();
                 if ($display_id == $currentproductId) {
                     $template = 'slider/slider.phtml';
+                    return $template;
                 }
             }
         } elseif ($slider_display_page == Excellence_Slider_Model_Pages::CHECKOUT_PAGE) {
             if (Mage::helper('core/url')->getCurrentUrl() == Mage::getURL('checkout/onepage')) {
                 $template = 'slider/slider.phtml';
+                return $template;
             }
         } elseif ($slider_display_page == Excellence_Slider_Model_Pages::CART_PAGE) {
             if (Mage::helper('core/url')->getCurrentUrl() == Mage::getURL('checkout/cart')) {
                 $template = 'slider/slider.phtml';
+                return $template;
             }
         }
-        return $template;
+        // return $template;
     }
 
     public function getSliderName() {
