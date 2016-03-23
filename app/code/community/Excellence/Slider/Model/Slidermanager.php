@@ -40,7 +40,9 @@ class Excellence_Slider_Model_Slidermanager extends Mage_Core_Model_Abstract {
                 ->toArray();
 
         $categories = array();
-        $categories[0] = '----Select Category----';
+        $categories[0]['label'] = '----Select Category----';
+        $categories[0]['level'] = 0;
+        $categories[0]['value'] = 0;
         foreach ($categoriesArray as $categoryId => $category) {
             if (isset($category['name']) && isset($category['level']) && $category['level'] != 0) {
                 $name = "";
